@@ -177,7 +177,7 @@ The following screenshots demonstrate the major project functions.
 
 ### 8.4 Wireless Connectivity
 
-![Wireless Connectivity](Screenshots/04-wireless-connectivity.png)
+![Wireless Connectivity](Screenshots/04-wireless-connection.png)
 
 ## 9. Project Folder Structure
 
