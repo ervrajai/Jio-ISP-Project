@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google</title>
+  <style>
+    /* ================================================================= *
+     * High-Fidelity Google Homepage - Responsive & Mobile-Optimized
+     * ================================================================= *
+     * - Strictly NO transform usage (uses layout/opacity styling instead)
+     * - Lightweight, fast-loading, clean layout structure
+     * - Fully responsive for mobile, tablet, and desktop screens
+     * ================================================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: #202124;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Header */
+    header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 12px 16px;
+      gap: 12px;
+      width: 100%;
+    }
+
+    header a {
+      color: rgba(0, 0, 0, 0.87);
+      text-decoration: none;
+      font-size: 13px;
+      line-height: 24px;
+    }
+
+    header a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-sign-in {
+      background-color: #1a73e8;
+      color: #ffffff !important;
+      border: none;
+      padding: 8px 20px;
+      font-weight: 500;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none !important;
+      transition: background-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-sign-in:hover {
+      background-color: #1b66c9;
+      box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .logo-container {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .logo-container img {
+      width: 272px;
+      max-width: 80vw;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Search Form Layout */
+    .search-form {
+      width: 100%;
+      max-width: 620px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Pill Search Bar */
+    .search-box {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #dfe1e5;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px 0 16px;
+      background-color: #ffffff;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+      gap: 10px;
+    }
+
+    .search-box:hover, .search-box:focus-within {
+      background-color: #ffffff;
+      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+      border-color: rgba(223, 225, 229, 0);
+    }
+
+    /* Plus icon at the start */
+    .search-icon-plus {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #5f6368;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .search-icon-plus:hover {
+      background-color: rgba(95, 99, 104, 0.1);
+      color: #202124;
+    }
+
+    .search-icon-plus svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .search-input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.87);
+      background: transparent;
+      min-width: 0;
+    }
+
+    /* Right Icons and AI Mode Button Container */
+    .search-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .search-action-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 6px;
+      color: #5f6368;
+      border-radius: 50%;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .search-action-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .search-action-icon:hover {
+      background-color: rgba(95, 99, 104, 0.1);
+      color: #202124;
+    }
+
+    /* AI Mode Button Pill inside the Search Box */
+    .ai-mode-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #f1f3f4;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #001d35;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .ai-mode-btn:hover {
+      background-color: #e8eaed;
+      border-color: #dadce0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .ai-mode-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* Outside Buttons Group */
+    .button-group {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      background-color: #f8f9fa;
+      border: 1px solid #f8f9fa;
+      border-radius: 4px;
+      color: #3c4043;
+      font-size: 14px;
+      padding: 0 16px;
+      height: 36px;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    }
+
+    .btn-action:hover {
+      border: 1px solid #dadce0;
+      color: #202124;
+      background-color: #f8f9fa;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Language Switcher */
+    .lang-info {
+      font-size: 13px;
+      margin-top: 24px;
+      color: #4d5156;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .lang-info a {
+      color: #1a0dab;
+      text-decoration: none;
+      margin-left: 6px;
+      display: inline-block;
+    }
+
+    .lang-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer Section */
+    footer {
+      background: #f2f2f2;
+      color: #70757a;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .footer-location {
+      padding: 14px 24px;
+      border-bottom: 1px solid #dadce0;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 0 16px;
+    }
+
+    .footer-links-group {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #70757a;
+      padding: 12px 14px;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Mobile Responsive Breakpoints */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 12px;
+      }
+
+      main {
+        padding: 10px 12px;
+        justify-content: flex-start;
+        padding-top: 12vh;
+      }
+
+      .search-box {
+        height: 44px;
+        padding: 0 8px 0 12px;
+      }
+
+      .ai-mode-span {
+        display: none; /* Hides text on very small screens, keeps icon neat if needed, or scale down */
+      }
+      
+      .ai-mode-btn {
+        padding: 6px 8px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+      }
+
+      .footer-links-group {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .footer-location {
+        text-align: center;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <a href="#">Gmail</a>
+    <a href="#">Images</a>
+    <a href="#" class="btn-sign-in">Sign in</a>
+  </header>
+
+  <!-- Main Search Container -->
+  <main>
+    <div class="logo-container">
+      <img src="google_logo.png" alt="Google" width="272" height="92">
+    </div>
+
+    <!-- Search Form with Inside Plus, Input, Voice, Lens, and AI Mode -->
+    <form action="https://www.google.com/search" method="GET" class="search-form">
+      <div class="search-box">
+        <!-- Start Plus Icon -->
+        <div class="search-icon-plus" title="Add">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+          </svg>
+        </div>
+
+        <input type="text" name="q" class="search-input" title="Search" autofocus placeholder="Ask Google" autocomplete="off">
+
+        <div class="search-actions">
+          <!-- Voice Search Icon -->
+          <button type="button" class="search-action-icon" title="Search by voice">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+              <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+            </svg>
+          </button>
+
+          <!-- Google Lens / Image Search Icon -->
+          <button type="button" class="search-action-icon" title="Search by image">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 16.667a4.666 4.666 0 1 0 0-9.333 4.666 4.666 0 0 0 0 9.333m8 6a2.666 2.666 0 1 0 0-5.333 2.666 2.666 0 0 0 0 5.333m-13.333-2a3.343 3.343 0 0 1-3.334-3.334v-2.666H0v2.666A6.665 6.665 0 0 0 6.667 24h2.666v-3.333zm-3.334-14c0-1.834 1.5-3.334 3.334-3.334h2.666V0H6.667A6.665 6.665 0 0 0 0 6.667v2.666h3.333zm14-3.334c1.834 0 3.334 1.5 3.334 3.334v2.666H24V6.667A6.665 6.665 0 0 0 17.333 0h-2.666v3.333z"/>
+            </svg>
+          </button>
+
+          <!-- AI Mode Pill Button -->
+          <button type="button" class="ai-mode-btn" title="AI Mode">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M13,19.9381062 L13,21 L16,21 L16,23 L8,23 L8,21 L11,21 L11,19.9381062 C7.05368842,19.4460082 4,16.0796177 4,12 L4,10 L6,10 L6,12 C6,15.3137085 8.6862915,18 12,18 C15.3137085,18 18,15.3137085 18,12 L18,10 L20,10 L20,12 C20,16.0796177 16.9463116,19.4460082 13,19.9381062 Z M12,1 C14.209139,1 16,2.790861 16,5 L16,12 C16,14.209139 14.209139,16 12,16 C9.790861,16 8,14.209139 8,12 L8,5 C8,2.790861 9.790861,1 12,1 Z M12,3 C10.8954305,3 10,3.8954305 10,5 L10,12 C10,13.1045695 10.8954305,14 12,14 C13.1045695,14 14,13.1045695 14,12 L14,5 C14,3.8954305 13.1045695,3 12,3 Z"/>
+            </svg>
+            <span class="ai-mode-span">AI Mode</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn-action">Google Search</button>
+        <button type="button" class="btn-action" onclick="window.location.href='https://www.google.com/doodles'">I'm Feeling Lucky</button>
+      </div>
+    </form>
+
+    <div class="lang-info">
+      Google offered in: 
+      <a href="#">Hindi</a>
+      <a href="#">Bengali</a>
+      <a href="#">Telugu</a>
+      <a href="#">Marathi</a>
+      <a href="#">Tamil</a>
+      <a href="#">Gujarati</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-location">India</div>
+    <div class="footer-links">
+      <div class="footer-links-group">
+        <a href="#">About</a>
+        <a href="#">Advertising</a>
+        <a href="#">Business</a>
+        <a href="#">How Search works</a>
+      </div>
+      <div class="footer-links-group">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Settings</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

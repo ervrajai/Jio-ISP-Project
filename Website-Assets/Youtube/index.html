@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube - Modern Light Interface</title>
+  <style>
+    /* CSS Reset & Core Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #0f0f0f;
+      font-family: "Roboto", "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* --- HEADER STYLING --- */
+    header {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 16px;
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #f2f2f2;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .brand-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .yt-circle-logo {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+
+    .brand-text {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: #0f0f0f;
+      font-family: "YouTube Sans", "Roboto", sans-serif;
+    }
+
+    /* Modern Pill Search Bar */
+    .search-container {
+      display: flex;
+      flex: 1;
+      max-width: 640px;
+      align-items: center;
+    }
+
+    .search-box {
+      display: flex;
+      width: 100%;
+      border-radius: 40px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background: #ffffff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-box:focus-within {
+      border-color: #1c62b9;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-input {
+      background: transparent;
+      border: none;
+      padding: 0 16px;
+      height: 40px;
+      width: 100%;
+      font-size: 16px;
+      color: #0f0f0f;
+      outline: none;
+    }
+
+    .search-btn {
+      background: #f8f8f8;
+      border: none;
+      border-left: 1px solid #ccc;
+      width: 64px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f0f0f;
+    }
+
+    .search-btn:hover {
+      background: #f0f0f0;
+    }
+
+    .search-btn svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    /* Actions & Profile */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .create-btn {
+      background: #f2f2f2;
+      color: #0f0f0f;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s ease;
+    }
+
+    .create-btn:hover {
+      background: #e5e5e5;
+    }
+
+    .profile-avatar {
+      background: #2563eb;
+      color: #ffffff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      user-select: none;
+    }
+
+    /* --- LAYOUT STRUCTURE --- */
+    .layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: calc(100vh - 56px);
+    }
+
+    /* Sidebar Section */
+    aside {
+      padding: 12px 12px;
+      background: #ffffff;
+      position: sticky;
+      top: 56px;
+      height: calc(100vh - 56px);
+      overflow-y: auto;
+      border-right: 1px solid #f2f2f2;
+    }
+
+    .side-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      font-size: 14px;
+      margin-bottom: 2px;
+      cursor: pointer;
+      color: #0f0f0f;
+      border-radius: 10px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .side-item:hover {
+      background: #f2f2f2;
+    }
+
+    .side-item.active {
+      background: #f2f2f2;
+      font-weight: 600;
+    }
+
+    aside hr {
+      border: none;
+      border-top: 1px solid #e5e5e5;
+      margin: 12px 0;
+    }
+
+    .side-heading {
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f0f0f;
+    }
+
+    /* Main Content Area */
+    main { 
+      padding: 16px 24px 32px; 
+      min-width: 0;
+    }
+
+    /* Filter Category Chips */
+    .categories {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-chip {
+      background: #f2f2f2;
+      border: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      color: #0f0f0f;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background 0.2s ease, color 0.2s ease;
+      user-select: none;
+    }
+
+    .category-chip:hover {
+      background: #e5e5e5;
+    }
+
+    .category-chip.active {
+      background: #0f0f0f;
+      color: #ffffff;
+    }
+
+    /* Video Grid Layout */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px 16px;
+    }
+
+    .video-card { 
+      min-width: 0;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 12px;
+      transition: background 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .video-card:hover {
+      background: #f2f2f2; /* Soft selected hover state */
+    }
+
+    .thumbnail-container {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .thumbnail-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+      transition: opacity 0.3s ease;
+    }
+
+    .time-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .video-meta {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .channel-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #d4d4d4;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1f2937;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .video-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .video-title {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.35;
+      margin: 0 0 4px;
+      color: #0f0f0f;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .video-details {
+      color: #606060;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .channel-name {
+      display: inline-block;
+      margin-bottom: 2px;
+      transition: color 0.15s ease;
+    }
+
+    .channel-name:hover {
+      color: #0f0f0f;
+    }
+
+    /* --- RESPONSIVE MEDIA QUERIES --- */
+    @media (max-width: 1300px) {
+      .videos-grid { 
+        grid-template-columns: repeat(3, minmax(0, 1fr)); 
+      }
+    }
+
+    @media (max-width: 960px) {
+      .layout { 
+        grid-template-columns: 1fr; 
+      }
+      aside { 
+        display: none; 
+      }
+      .videos-grid { 
+        grid-template-columns: repeat(2, minmax(0, 1fr)); 
+      }
+    }
+
+    @media (max-width: 580px) {
+      header { 
+        padding: 0 10px; 
+        gap: 8px; 
+      }
+      main { 
+        padding: 12px; 
+      }
+      .videos-grid { 
+        grid-template-columns: 1fr; 
+      }
+      .create-btn { 
+        display: none; 
+      }
+      .search-box {
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="brand" title="YouTube Home">
+      <button class="menu-button" aria-label="Toggle menu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+      
+      <!-- Updated Circular YouTube SVG Logo & Brand Text -->
+      <div class="brand-logo-container">
+        <svg class="yt-circle-logo" width="32px" height="32px" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fill-rule="evenodd">
+            <path d="M36,72 L36,72 C55.882251,72 72,55.882251 72,36 L72,36 C72,16.117749 55.882251,-3.65231026e-15 36,0 L36,0 C16.117749,3.65231026e-15 -2.4348735e-15,16.117749 0,36 L0,36 C2.4348735e-15,55.882251 16.117749,72 36,72 Z" fill="#FF0002"/>
+            <path d="M31.044,42.269916 L31.0425,28.6877416 L44.0115,35.5022437 L31.044,42.269916 Z M59.52,26.3341627 C59.52,26.3341627 59.0505,23.003199 57.612,21.5363665 C55.7865,19.610299 53.7405,19.6012352 52.803,19.4894477 C46.086,19 36.0105,19 36.0105,19 L35.9895,19 C35.9895,19 25.914,19 19.197,19.4894477 C18.258,19.6012352 16.2135,19.610299 14.3865,21.5363665 C12.948,23.003199 12.48,26.3341627 12.48,26.3341627 C12.48,26.3341627 12,30.2467232 12,34.1577731 L12,37.8256098 C12,41.7381703 12.48,45.6492202 12.48,45.6492202 C12.48,45.6492202 12.948,48.9801839 14.3865,50.4470165 C16.2135,52.3730839 18.612,52.3126583 19.68,52.5135736 C23.52,52.8851913 36,53 36,53 C36,53 46.086,52.9848936 52.803,52.4954459 C53.7405,52.3821478 55.7865,52.3730839 57.612,50.4470165 C59.0505,48.9801839 59.52,45.6492202 59.52,45.6492202 C59.52,45.6492202 60,41.7381703 60,37.8256098 L60,34.1577731 C60,30.2467232 59.52,26.3341627 59.52,26.3341627 L59.52,26.3341627 Z" fill="#FFF"/>
+          </g>
+        </svg>
+        <span class="brand-text">YouTube</span>
+      </div>
+    </div>
+
+    <!-- Center Search Component -->
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="Search">
+        <button class="search-btn" aria-label="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm-8 6a8 8 0 1 1 14.32 4.906l5.387 5.387a1 1 0 0 1-1.414 1.414l-5.387-5.387A8 8 0 0 1 2 10z" fill="#0D0D0D"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- User Profile & Action Buttons -->
+    <div class="header-actions">
+      <button class="create-btn">+ Create</button>
+      <div class="profile-avatar" title="User Profile">A</div>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <div class="layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside>
+      <a class="side-item active">Home</a>
+      <a class="side-item">Shorts</a>
+      <a class="side-item">Subscriptions</a>
+      <hr>
+      <div class="side-heading">You</div>
+      <a class="side-item">History</a>
+      <a class="side-item">Playlists</a>
+      <a class="side-item">Your Videos</a>
+      <a class="side-item">Watch Later</a>
+      <a class="side-item">Liked Videos</a>
+      <hr>
+      <div class="side-heading">Subscriptions</div>
+      <a class="side-item">Tech Today</a>
+      <a class="side-item">Travel Stories</a>
+      <a class="side-item">Gaming Hub</a>
+      <a class="side-item">Home Kitchen</a>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+      
+      <!-- Filter Chips Navigation -->
+      <div class="categories">
+        <button class="category-chip active">All</button>
+        <button class="category-chip">Gaming</button>
+        <button class="category-chip">Music</button>
+        <button class="category-chip">Technology</button>
+        <button class="category-chip">Travel</button>
+        <button class="category-chip">Cooking</button>
+        <button class="category-chip">Education</button>
+        <button class="category-chip">Computers</button>
+        <button class="category-chip">Live</button>
+        <button class="category-chip">Podcasts</button>
+      </div>
+
+      <!-- Video Grid -->
+      <section class="videos-grid">
+        
+        <!-- Video Card 1 -->
+        <article class="video-card">
+          <div class="thumbnail-container">
+            <img src="yt_gaming.jpg" alt="Gaming Setup" loading="lazy">
+            <span class="time-badge">14:20</span>
+          </div>
+          <div class="video-meta">
+            <div class="channel-avatar">GC</div>
+            <div class="video-info">
+              <h3 class="video-title">Ultimate Next-Gen Gaming Setup & Showcase</h3>
+              <div class="video-details">
+                <span class="channel-name">Gaming Channel</span>
+                <div>125K views · 2 days ago</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video Card 2 -->
+        <article class="video-card">
+          <div class="thumbnail-container">
+            <img src="yt_travel.jpg" alt="Travel Destination" loading="lazy">
+            <span class="time-badge">08:45</span>
+          </div>
+          <div class="video-meta">
+            <div class="channel-avatar">TS</div>
+            <div class="video-info">
+              <h3 class="video-title">10 Most Beautiful Island Destinations to Visit</h3>
+              <div class="video-details">
+                <span class="channel-name">Travel Stories</span>
+                <div>82K views · 1 day ago</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video Card 3 -->
+        <article class="video-card">
+          <div class="thumbnail-container">
+            <img src="yt_cooking.jpg" alt="Cooking Masterclass" loading="lazy">
+            <span class="time-badge">22:15</span>
+          </div>
+          <div class="video-meta">
+            <div class="channel-avatar">HK</div>
+            <div class="video-info">
+              <h3 class="video-title">Easy 15-Minute Restaurant Quality Pasta Recipes</h3>
+              <div class="video-details">
+                <span class="channel-name">Home Kitchen</span>
+                <div>45K views · 5 days ago</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video Card 4 -->
+        <article class="video-card">
+          <div class="thumbnail-container">
+            <img src="yt_music.jpg" alt="Music Recording Studio" loading="lazy">
+            <span class="time-badge">03:40</span>
+          </div>
+          <div class="video-meta">
+            <div class="channel-avatar">MS</div>
+            <div class="video-info">
+              <h3 class="video-title">Deep Focus Instrumental Soundtracks for Work & Study</h3>
+              <div class="video-details">
+                <span class="channel-name">Music Studio</span>
+                <div>210K views · 3 days ago</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video Card 5 -->
+        <article class="video-card">
+          <div class="thumbnail-container">
+            <img src="yt_technology.jpg" alt="Computer Microchip" loading="lazy">
+            <span class="time-badge">18:05</span>
+          </div>
+          <div class="video-meta">
+            <div class="channel-avatar">TT</div>
+            <div class="video-info">
+              <h3 class="video-title">How Next-Gen Quantum Architecture Actually Works</h3>
+              <div class="video-details">
+                <span class="channel-name">Tech Today</span>
+                <div>67K views · 4 days ago</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video Card 6 -->
+        <article class="video-card">
+          <div class="thumbnail-container">
+            <img src="yt_education.jpg" alt="Web Development Coding" loading="lazy">
+            <span class="time-badge">42:10</span>
+          </div>
+          <div class="video-meta">
+            <div class="channel-avatar">LH</div>
+            <div class="video-info">
+              <h3 class="video-title">Full Modern Web Architecture Crash Course for Beginners</h3>
+              <div class="video-details">
+                <span class="channel-name">Learning Hub</span>
+                <div>34K views · 6 days ago</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video Card 7 -->
+        <article class="video-card">
+          <div class="thumbnail-container">
+            <img src="yt_laptop.jpg" alt="Laptop Workspace" loading="lazy">
+            <span class="time-badge">11:55</span>
+          </div>
+          <div class="video-meta">
+            <div class="channel-avatar">TG</div>
+            <div class="video-info">
+              <h3 class="video-title">Essential Productivity Hacks & Workflows for Laptops</h3>
+              <div class="video-details">
+                <span class="channel-name">Tech Guide</span>
+                <div>91K views · 1 week ago</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Video Card 8 -->
+        <article class="video-card">
+          <div class="thumbnail-container">
+            <img src="yt_sports.jpg" alt="Athletes Running Track" loading="lazy">
+            <span class="time-badge">06:30</span>
+          </div>
+          <div class="video-meta">
+            <div class="channel-avatar">SC</div>
+            <div class="video-info">
+              <h3 class="video-title">Top Championship Moments & Insane Highlights</h3>
+              <div class="video-details">
+                <span class="channel-name">Sports Central</span>
+                <div>105K views · 2 days ago</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>

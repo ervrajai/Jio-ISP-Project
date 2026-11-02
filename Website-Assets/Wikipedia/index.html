@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wikipedia - The Free Encyclopedia</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;
+    }
+
+    body {
+      background: #ffffff;
+      color: #202122;
+      font-family: sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Header Navigation */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #a2a9b1;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    .mark {
+      font-family: 'Linux Libertine', Georgia, serif;
+      font-size: 30px;
+      border: 1px solid #a2a9b1;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+      color: #202122;
+    }
+
+    .brand-text h1 {
+      font-family: 'Linux Libertine', Georgia, serif;
+      font-size: 22px;
+      font-weight: normal;
+      color: #000000;
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      color: #54595d;
+    }
+
+    .search-box {
+      margin-left: auto;
+      display: flex;
+    }
+
+    .search-input {
+      border: 1px solid #a2a9b1;
+      padding: 6px 10px;
+      font-size: 13px;
+      width: 220px;
+      outline: none;
+    }
+
+    .search-btn {
+      background: #f8f9fa;
+      border: 1px solid #a2a9b1;
+      border-left: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    /* Welcome Banner */
+    .welcome {
+      background: #f8f9fa;
+      border-bottom: 1px solid #a2a9b1;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .welcome h2 {
+      font-family: 'Linux Libertine', Georgia, serif;
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 4px;
+    }
+
+    .welcome p {
+      color: #54595d;
+      font-size: 13px;
+    }
+
+    /* Page Layout */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    /* Panels & Cards */
+    .panel {
+      border: 1px solid #a2a9b1;
+      background: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .panel-header {
+      background: #f8f9fa;
+      border-bottom: 1px solid #a2a9b1;
+      padding: 8px 14px;
+    }
+
+    .panel-header h3 {
+      font-family: 'Linux Libertine', Georgia, serif;
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    .panel-body {
+      padding: 14px;
+    }
+
+    /* Topic Cards with Fixed Image Aspect Ratios */
+    .topic-item {
+      display: flex;
+      gap: 15px;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid #eaecf0;
+      align-items: flex-start;
+    }
+
+    .topic-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .topic-img-wrapper {
+      width: 120px;
+      height: 90px;
+      flex-shrink: 0;
+      background: #eaecf0;
+      border: 1px solid #c8ccd1;
+      overflow: hidden;
+    }
+
+    .topic-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .topic-content h4 {
+      margin-bottom: 4px;
+    }
+
+    .topic-content h4 a {
+      color: #0645ad;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .topic-content h4 a:hover {
+      text-decoration: underline;
+    }
+
+    .topic-content p {
+      font-size: 13px;
+      color: #54595d;
+    }
+
+    /* Sidebar Links */
+    .quick-links {
+      list-style: none;
+    }
+
+    .quick-links li {
+      padding: 6px 0;
+      border-bottom: 1px solid #eaecf0;
+    }
+
+    .quick-links li:last-child {
+      border-bottom: none;
+    }
+
+    .quick-links a {
+      color: #0645ad;
+      text-decoration: none;
+    }
+
+    .quick-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #a2a9b1;
+      background: #f8f9fa;
+      padding: 15px;
+      text-align: center;
+      font-size: 12px;
+      color: #54595d;
+      margin-top: 20px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      
+      .search-box {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .topic-img-wrapper {
+        width: 90px;
+        height: 68px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="brand-logo">
+      <div class="mark">W</div>
+      <div class="brand-text">
+        <h1>Wikipedia</h1>
+        <p>The Free Encyclopedia</p>
+      </div>
+    </a>
+    <div class="search-box">
+      <input type="text" class="search-input" placeholder="Search Wikipedia">
+      <button class="search-btn">Search</button>
+    </div>
+  </header>
+
+  <!-- Welcome Section -->
+  <section class="welcome">
+    <h2>Welcome to Wikipedia</h2>
+    <p>The free encyclopedia that anyone can edit.</p>
+  </section>
+
+  <!-- Main Content Layout -->
+  <main class="container">
+    
+    <!-- Left Column -->
+    <section>
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Explore Featured Topics</h3>
+        </div>
+        <div class="panel-body">
+          
+          <div class="topic-item">
+            <div class="topic-img-wrapper">
+              <img src="wiki_earth.jpg" alt="Planet Earth">
+            </div>
+            <div class="topic-content">
+              <h4><a href="#">Earth and Geography</a></h4>
+              <p>Explore our planet, continents, oceans, and the natural environment across global eco-systems.</p>
+            </div>
+          </div>
+
+          <div class="topic-item">
+            <div class="topic-img-wrapper">
+              <img src="wiki_history.jpg" alt="History">
+            </div>
+            <div class="topic-content">
+              <h4><a href="#">History</a></h4>
+              <p>Discover ancient civilizations, human progression, and major historical events worldwide.</p>
+            </div>
+          </div>
+
+          <div class="topic-item">
+            <div class="topic-img-wrapper">
+              <img src="wiki_science.jpg" alt="Science">
+            </div>
+            <div class="topic-content">
+              <h4><a href="#">Science & Technology</a></h4>
+              <p>Learn about scientific achievements, space exploration, modern engineering, and physics.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Sidebar -->
+    <aside>
+      <div class="panel">
+        <div class="panel-header">
+          <h3>About Wikipedia</h3>
+        </div>
+        <div class="panel-body">
+          <p style="font-size: 13px; color: #54595d;">
+            Wikipedia is a multilingual free online encyclopedia written and maintained by a community of volunteers.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Quick Topics</h3>
+        </div>
+        <div class="panel-body">
+          <ul class="quick-links">
+            <li><a href="#">Geography</a></li>
+            <li><a href="#">Science</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">History</a></li>
+            <li><a href="#">Space & Astronomy</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    Wikipedia Educational Simulation | Cisco Packet Tracer Web Server Demo
+  </footer>
+
+</body>
+</html>

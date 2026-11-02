@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jio - Digital Life, Fiber Router Plans & Services</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fixed Navigation Header Matching Image 1 */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 72px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      z-index: 1000;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    nav.main-nav {
+      display: flex;
+      gap: 24px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    nav.main-nav a {
+      color: #0a28b8;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 20px;
+      transition: background-color 0.2s;
+    }
+
+    nav.main-nav a:hover, nav.main-nav a.active {
+      background-color: #eaf0fe;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-right a {
+      color: #0a28b8;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      border-radius: 50%;
+      color: #0a28b8;
+      transition: background-color 0.2s;
+    }
+
+    .icon-btn:hover {
+      background-color: #eaf0fe;
+    }
+
+    .profile-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #eaf0fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .profile-avatar svg {
+      width: 20px;
+      height: 20px;
+      fill: #0a28b8;
+    }
+
+    /* Main Container */
+    main {
+      padding: 100px 20px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Section 1: Recharge or Pay Bills */
+    .recharge-section {
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .main-heading {
+      font-size: 40px;
+      font-weight: 900;
+      color: #000000;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    /* Toggle Switch (Mobile / Home) */
+    .toggle-container {
+      display: inline-flex;
+      background-color: #f2f2f2;
+      border-radius: 30px;
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+
+    .toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 24px;
+      cursor: pointer;
+      background: transparent;
+      color: #0a28b8;
+      transition: all 0.2s ease;
+    }
+
+    .toggle-btn.active {
+      background-color: #0a28b8;
+      color: #ffffff;
+    }
+
+    .toggle-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .toggle-btn.active svg {
+      fill: #ffffff;
+    }
+
+    /* Input & Proceed Box */
+    .input-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .input-box {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .input-field {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border: 1px solid #cccccc;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+      color: #000000;
+    }
+
+    .input-field:focus {
+      border-color: #0a28b8;
+    }
+
+    .proceed-btn {
+      height: 48px;
+      padding: 0 32px;
+      background-color: #0a28b8;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .proceed-btn:hover {
+      background-color: #081e8a;
+    }
+
+    /* Quick Links with Smooth Light Gray Hover and No Transform */
+    .quick-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .quick-link-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      width: 120px;
+      padding: 16px 12px;
+      border-radius: 24px;
+      background-color: transparent;
+      transition: background-color 0.2s ease;
+    }
+
+    /* Smooth light gray hover background without transform */
+    .quick-link-item:hover {
+      background-color: #f2f2f2;
+    }
+
+    .icon-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: #eaf0fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .quick-link-item:hover .icon-circle {
+      background-color: #e4e9f0;
+    }
+
+    .icon-circle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .quick-link-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #000000;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Section 2: Fiber Router & Broadband Plans */
+    .section-header {
+      width: 100%;
+      margin-top: 40px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .section-title-large {
+      font-size: 32px;
+      font-weight: 900;
+      color: #000000;
+      letter-spacing: -0.5px;
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      width: 100%;
+      margin-bottom: 60px;
+      align-items: stretch;
+    }
+
+    .plans-subgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .plan-card {
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    /* Smooth light gray hover background for cards with no transform shift */
+    .plan-card:hover {
+      background-color: #f7f7f7;
+      border-color: #cccccc;
+    }
+
+    .plan-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #000000;
+      margin-bottom: 4px;
+    }
+
+    .plan-speed {
+      font-size: 13px;
+      color: #0a28b8;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .plan-price {
+      font-size: 26px;
+      font-weight: 900;
+      color: #000000;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #eeeeee;
+      padding-bottom: 12px;
+    }
+
+    .plan-price span {
+      font-size: 13px;
+      font-weight: 500;
+      color: #666666;
+    }
+
+    .plan-features {
+      list-style: none;
+      font-size: 13px;
+      color: #555555;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .plan-features li svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .btn-plan {
+      width: 100%;
+      background-color: #0a28b8;
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-plan:hover {
+      background-color: #081e8a;
+    }
+
+    /* Router Showcase Box */
+    .router-card {
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .router-card:hover {
+      background-color: #f7f7f7;
+      border-color: #cccccc;
+    }
+
+    .router-img-frame {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: #f9f9f9;
+      overflow: hidden;
+    }
+
+    .router-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .router-body {
+      padding: 20px;
+    }
+
+    .router-body h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .router-body p {
+      font-size: 13px;
+      color: #666666;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      border-top: 1px solid #e0e0e0;
+      padding: 24px;
+      color: #666666;
+      font-size: 13px;
+      text-align: center;
+      margin-top: auto;
+      background-color: #ffffff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      header {
+        padding: 0 20px;
+      }
+
+      nav.main-nav {
+        display: none;
+      }
+
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .plans-subgrid {
+        grid-template-columns: 1fr;
+      }
+
+      .main-heading {
+        font-size: 28px;
+      }
+
+      .input-wrapper {
+        flex-direction: column;
+      }
+
+      .input-box, .proceed-btn {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation Matching Image 1 -->
+  <header>
+    <div class="header-left">
+      <a href="#" class="brand">
+        <img src="jio_logo.png" alt="Jio Logo" class="logo-img" width="100" height="38" loading="eager">
+      </a>
+      <nav class="main-nav">
+        <a href="#" class="active">Mobile</a>
+        <a href="#">Home</a>
+        <a href="#">Business</a>
+        <a href="#">Customer Care</a>
+      </nav>
+    </div>
+
+    <div class="header-right">
+      <a href="#">Investor</a>
+      
+      <!-- Custom Search SVG Provided by User -->
+      <button class="icon-btn" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm-8 6a8 8 0 1 1 14.32 4.906l5.387 5.387a1 1 0 0 1-1.414 1.414l-5.387-5.387A8 8 0 0 1 2 10z" fill="#0A28B8"/>
+        </svg>
+      </button>
+
+      <!-- Profile Avatar -->
+      <div class="profile-avatar">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Recharge or Pay Bills Section -->
+    <section class="recharge-section">
+      <h1 class="main-heading">Recharge or pay bills</h1>
+
+      <!-- Toggle Controls -->
+      <div class="toggle-container">
+        <button class="toggle-btn active">
+          <!-- Mobile SIM Icon -->
+          <svg viewBox="0 0 16 16" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+            <path d="m 4 0 c -2 0 -2 2 -2 2 v 12 c 0 2 2 2 2 2 h 8 s 2 0 2 -2 v -11 l -3 -3 z m 1 6 l 1 0.007812 v 2 h -2 v -1.007812 s 0 -1 1 -1 z m 6 0 c 1 0 1 1 1 1 l -0.003906 1 h -2 v -2 z m -4 0.007812 h 2 v 2 h -2 z"/>
+          </svg>
+          Mobile
+        </button>
+        <button class="toggle-btn">
+          <!-- Home Router Icon -->
+          <svg viewBox="0 0 24 24" fill="#0a28b8" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 13.95h21v7.64H1.5z" fill="none" stroke="#0a28b8" stroke-width="1.91"/>
+            <circle cx="5.32" cy="17.77" r="0.95" fill="#0a28b8"/>
+            <path d="M9.3 7.44a3.82 3.82 0 0 1 5.4 0M6.6 4.74a7.62 7.62 0 0 1 10.8 0" fill="none" stroke="#0a28b8" stroke-width="1.91"/>
+          </svg>
+          Home
+        </button>
+      </div>
+
+      <!-- Input Field and Action Button -->
+      <div class="input-wrapper">
+        <div class="input-box">
+          <input type="text" class="input-field" placeholder="+91 Jio Number">
+        </div>
+        <button class="proceed-btn">Proceed</button>
+      </div>
+
+      <!-- Quick Action Icons with Uniform Styling and Light Gray Hover -->
+      <div class="quick-links">
+        <a href="#" class="quick-link-item">
+          <div class="icon-circle">
+            <svg viewBox="0 0 15 15" fill="#0a28b8" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.8254 0.120372C7.63815 -0.0401239 7.36185 -0.0401239 7.1746 0.120372L0 6.27003V13.5C0 14.3284 0.671573 15 1.5 15H5.5C5.77614 15 6 14.7761 6 14.5V11.5C6 10.6716 6.67157 10 7.5 10C8.32843 10 9 10.6716 9 11.5V14.5C9 14.7761 9.22386 15 9.5 15H13.5C14.3284 15 15 14.3284 15 13.5V6.27003L7.8254 0.120372Z"/>
+            </svg>
+          </div>
+          <span class="quick-link-title">Get JioHome</span>
+        </a>
+
+        <a href="#" class="quick-link-item">
+          <div class="icon-circle">
+            <svg viewBox="0 0 16 16" fill="#0a28b8" xmlns="http://www.w3.org/2000/svg">
+              <path d="m 4 0 c -2 0 -2 2 -2 2 v 12 c 0 2 2 2 2 2 h 8 s 2 0 2 -2 v -11 l -3 -3 z m 1 6 l 1 0.007812 v 2 h -2 v -1.007812 s 0 -1 1 -1 z m 6 0 c 1 0 1 1 1 1 l -0.003906 1 h -2 v -2 z m -4 0.007812 h 2 v 2 h -2 z"/>
+            </svg>
+          </div>
+          <span class="quick-link-title">Get Jio SIM</span>
+        </a>
+
+        <a href="#" class="quick-link-item">
+          <div class="icon-circle">
+            <svg viewBox="0 0 36 36" fill="#0a28b8" xmlns="http://www.w3.org/2000/svg">
+              <path d="M34.11,24.49l-3.92-6.62,3.88-6.35A1,1,0,0,0,33.22,10H2a2,2,0,0,0-2,2V24a2,2,0,0,0,2,2H33.25A1,1,0,0,0,34.11,24.49Zm-23.6-3.31H9.39L6.13,16.84v4.35H5V15H6.13l3.27,4.35V15h1.12ZM16.84,16H13.31v1.49h3.2v1h-3.2v1.61h3.53v1H12.18V15h4.65Zm8.29,5.16H24l-1.55-4.59L20.9,21.18H19.78l-2-6.18H19l1.32,4.43L21.84,15h1.22l1.46,4.43L25.85,15h1.23Z"/>
+            </svg>
+          </div>
+          <span class="quick-link-title">Port to Jio</span>
+        </a>
+
+        <!-- Custom VIP Number SVG Provided by User -->
+        <a href="#" class="quick-link-item">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="#0a28b8" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 19h20v2H2v-2zm9-11h2v8h-2V8zM7.965 8h2.125l-2.986 7.964h-2L2.118 8h2.125l1.861 5.113L7.965 8zM17 14v2h-2V8h4a3 3 0 0 1 0 6h-2zm0-4v2h2a1 1 0 0 0 0-2h-2zM2 3h20v2H2V3z"/>
+            </svg>
+          </div>
+          <span class="quick-link-title">VIP number</span>
+        </a>
+
+        <!-- Support Card with Normal Uniform Styling -->
+        <a href="#" class="quick-link-item">
+          <div class="icon-circle">
+            <svg viewBox="-1 0 19 19" fill="#0a28b8" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.417 9.583A7.917 7.917 0 1 1 8.5 1.666a7.917 7.917 0 0 1 7.917 7.917zM5.85 3.309a6.833 6.833 0 1 0 2.65-.534 6.787 6.787 0 0 0-2.65.534zm2.654 1.336A1.136 1.136 0 1 1 7.37 5.78a1.136 1.136 0 0 1 1.135-1.136zm.792 9.223V8.665a.792.792 0 1 0-1.583 0v5.203a.792.792 0 0 0 1.583 0z"/>
+            </svg>
+          </div>
+          <span class="quick-link-title">Support</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Fiber Router Subscription Plans Section -->
+    <div class="section-header">
+      <h2 class="section-title-large">JioFiber Plans & Router Showcase</h2>
+    </div>
+
+    <div class="showcase-grid">
+      <div class="plans-subgrid">
+        <!-- Basic Plan -->
+        <div class="plan-card">
+          <div>
+            <div class="plan-name">Basic Fiber</div>
+            <!-- Custom Speedometer SVG Provided by User -->
+            <div class="plan-speed">
+              <svg width="18" height="18" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 4px;">
+                <path fill="#0a28b8" d="m 14.703125,5.5722656 a 12,12 0 0 0 -12,12.0000004 12,12 0 0 0 0.6894531,3.964843 A 10.746539,10.746539 0 0 1 3.0976562,19.09375 10.746539,10.746539 0 0 1 13.84375,8.3476562 10.746539,10.746539 0 0 1 19.826172,10.173828 L 21.966797,8.0332031 A 12,12 0 0 0 14.703125,5.5722656 Z m 9.148437,3.6035156 c -0.25173,0.00423 -0.507325,0.1022801 -0.71875,0.28125 l -9.193359,7.7812498 c -0.422789,0.35795 -1.416166,1.411952 -0.002,2.826172 1.414471,1.41445 2.468093,0.418804 2.826172,-0.0039 l 7.783203,-9.189453 c 0.358051,-0.42275 0.391737,-1.0223328 0,-1.4140628 -0.195869,-0.19587 -0.443582,-0.285475 -0.695313,-0.28125 z m 1.84961,3.6074218 -2.021484,2.021485 A 10.746539,10.746539 0 0 1 24.585938,19 h 2.015624 a 12,12 0 0 0 0.101563,-1.427734 12,12 0 0 0 -1.001953,-4.789063 z"/>
+              </svg>
+              30 Mbps Speed
+            </div>
+            <div class="plan-price">₹399 <span>/month</span></div>
+            <ul class="plan-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Unlimited Data
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Free Dual-Band Router
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Unlimited Voice Calling
+              </li>
+            </ul>
+          </div>
+          <button class="btn-plan">Select Plan</button>
+        </div>
+
+        <!-- Standard Plan -->
+        <div class="plan-card">
+          <div>
+            <div class="plan-name">Standard Fiber</div>
+            <div class="plan-speed">
+              <svg width="18" height="18" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 4px;">
+                <path fill="#0a28b8" d="m 14.703125,5.5722656 a 12,12 0 0 0 -12,12.0000004 12,12 0 0 0 0.6894531,3.964843 A 10.746539,10.746539 0 0 1 3.0976562,19.09375 10.746539,10.746539 0 0 1 13.84375,8.3476562 10.746539,10.746539 0 0 1 19.826172,10.173828 L 21.966797,8.0332031 A 12,12 0 0 0 14.703125,5.5722656 Z m 9.148437,3.6035156 c -0.25173,0.00423 -0.507325,0.1022801 -0.71875,0.28125 l -9.193359,7.7812498 c -0.422789,0.35795 -1.416166,1.411952 -0.002,2.826172 1.414471,1.41445 2.468093,0.418804 2.826172,-0.0039 l 7.783203,-9.189453 c 0.358051,-0.42275 0.391737,-1.0223328 0,-1.4140628 -0.195869,-0.19587 -0.443582,-0.285475 -0.695313,-0.28125 z m 1.84961,3.6074218 -2.021484,2.021485 A 10.746539,10.746539 0 0 1 24.585938,19 h 2.015624 a 12,12 0 0 0 0.101563,-1.427734 12,12 0 0 0 -1.001953,-4.789063 z"/>
+              </svg>
+              100 Mbps Speed
+            </div>
+            <div class="plan-price">₹699 <span>/month</span></div>
+            <ul class="plan-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Unlimited Data
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Wi-Fi 6 Router
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                14+ OTT Apps Included
+              </li>
+            </ul>
+          </div>
+          <button class="btn-plan">Select Plan</button>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="plan-card">
+          <div>
+            <div class="plan-name">Premium Fiber</div>
+            <div class="plan-speed">
+              <svg width="18" height="18" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 4px;">
+                <path fill="#0a28b8" d="m 14.703125,5.5722656 a 12,12 0 0 0 -12,12.0000004 12,12 0 0 0 0.6894531,3.964843 A 10.746539,10.746539 0 0 1 3.0976562,19.09375 10.746539,10.746539 0 0 1 13.84375,8.3476562 10.746539,10.746539 0 0 1 19.826172,10.173828 L 21.966797,8.0332031 A 12,12 0 0 0 14.703125,5.5722656 Z m 9.148437,3.6035156 c -0.25173,0.00423 -0.507325,0.1022801 -0.71875,0.28125 l -9.193359,7.7812498 c -0.422789,0.35795 -1.416166,1.411952 -0.002,2.826172 1.414471,1.41445 2.468093,0.418804 2.826172,-0.0039 l 7.783203,-9.189453 c 0.358051,-0.42275 0.391737,-1.0223328 0,-1.4140628 -0.195869,-0.19587 -0.443582,-0.285475 -0.695313,-0.28125 z m 1.84961,3.6074218 -2.021484,2.021485 A 10.746539,10.746539 0 0 1 24.585938,19 h 2.015624 a 12,12 0 0 0 0.101563,-1.427734 12,12 0 0 0 -1.001953,-4.789063 z"/>
+              </svg>
+              300 Mbps Speed
+            </div>
+            <div class="plan-price">₹999 <span>/month</span></div>
+            <ul class="plan-features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Gigabit Ready Fiber
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Mesh Extender Ready
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="#0a28b8"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                All Premium OTT Apps
+              </li>
+            </ul>
+          </div>
+          <button class="btn-plan">Select Plan</button>
+        </div>
+      </div>
+
+      <!-- Fiber Router Image Frame -->
+      <div class="router-card">
+        <div class="router-img-frame">
+          <img src="jio_broadband.jpg" alt="Jio Wi-Fi Router" width="1000" height="1000" loading="eager">
+        </div>
+        <div class="router-body">
+          <h3>JioFiber Wi-Fi Router</h3>
+          <p>Ultra-fast home broadband connectivity with dual-band coverage and zero data loss.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© Jio Platforms Limited. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
